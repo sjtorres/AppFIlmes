@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "App Filmes",
-    "slug": "AppFilmes",
+    "name": "StoryFlix",
+    "slug": "StoryFlix",
     "platforms": [
       "ios",
       "android",
