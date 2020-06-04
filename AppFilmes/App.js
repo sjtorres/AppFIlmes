@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
-import { StyleSheet, ScrollView, ImageBackground, Text, Dimensions, View } from 'react-native'
+import { StyleSheet, ScrollView, ImageBackground, Text,
+   Dimensions, TextInput, TouchableOpacity, View 
+} from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialIcons'
+
+import Constants from 'expo-constants'
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window')
 
@@ -50,10 +55,22 @@ export default function App() {
       <View style={{ flex: 1,  height: screenHeight}}>
         <View style={{...StyleSheet.absoluteFill, backgroundColor: '#000'}}>
           <ImageBackground
-          source={{ uri: background}}
-          style={styles.imgBg}
-          blurRadius={8}
-          >
+            source={{ uri: background}}
+            style={styles.imgBg}
+            blurRadius={8}
+            >
+
+            <View style={styles.viewSearch}>
+              <TextInput
+                style={styles.input}
+                placeholder="Procurando algo?"
+                />
+
+                <TouchableOpacity>
+                  <Icon name='search' color="#000" size={25} />
+                </TouchableOpacity>
+
+            </View>
           
           </ImageBackground>
         </View>
@@ -65,6 +82,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: Constants.statusBarHeight + 5,
   },
   imgBg: {
     flex: 1,
@@ -73,5 +91,15 @@ const styles = StyleSheet.create({
     opacity: 1,
     justifyContent: "flex-start",
     backgroundColor: '#000'
-  }
+  },
+  viewSearch: {
+    marginTop: 20,
+    backgroundColor: '#fff',
+    elevation: 10,
+    borderRadius: 5,
+    marginVertical: 10,
+    width: '95%',
+    flexDirection: 'row',
+    alignSelf: 'center'
+  },
 })
