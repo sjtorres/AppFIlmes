@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { StyleSheet, ScrollView, ImageBackground, Text,
-   Dimensions, TextInput, TouchableOpacity, View 
+   Dimensions, TextInput, TouchableOpacity, View, Image
 } from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialIcons'
 
+import Icon from 'react-native-vector-icons/MaterialIcons'
+import Carousel from 'react-native-snap-carousel'
 import Constants from 'expo-constants'
 
 const {width: screenWidth, height: screenHeight} = Dimensions.get('window')
 
 export default function App() {
+  const carouselRef = useRef(null)
+
   const [lista, setLista] = useState([
     {
       title:"O Justiceiro",
@@ -50,6 +53,21 @@ export default function App() {
 
   const [background, setBackground] = useState(lista[0].img)
 
+  const _renderItem = ({ item, index }) => {
+    return (
+      <View>
+        <TouchableOpacity>
+          <Image 
+            source={{ uri: item.img }}
+            styl={styles.carouselImg}
+          />
+          <Text style={styles.carouselText}>{item.title}</Text>
+          <Icon name="play-circle-outline" size={30} coçor={'#fff'} />
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
   return (
     <ScrollView style={styles.container}>
       <View style={{ flex: 1,  height: screenHeight}}>
@@ -69,7 +87,22 @@ export default function App() {
                 <TouchableOpacity>
                   <Icon style={styles.icon} name='search' color="#000" size={25} />
                 </TouchableOpacity>
+            </View>
 
+            <Text style={{color: '#fff', fontSize: 25, marginLeft: 10, marginVertical: 10}}>
+              Acabou de chegar
+            </Text>
+
+            <View style={styles.slideView}>
+              <Carousel 
+                style={styles.carousel}
+                ref={carouselRef}
+                data={lista}
+                renderItem={_renderItem}
+                sliderWidth={screenWidth}
+                itemWidth={200}
+                inactiveSlideOpacity={0.5}
+              />
             </View>
           
           </ImageBackground>
@@ -111,5 +144,11 @@ const styles = StyleSheet.create({
   icon: {
     position: "absolute",
     top: 15,
+  },
+  slideView: {
+    width: '100%',
+    height: 350,
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 })
