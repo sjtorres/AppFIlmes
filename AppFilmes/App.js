@@ -59,10 +59,14 @@ export default function App() {
         <TouchableOpacity>
           <Image 
             source={{ uri: item.img }}
-            styl={styles.carouselImg}
+            style={styles.carouselImg}
           />
           <Text style={styles.carouselText}>{item.title}</Text>
-          <Icon name="play-circle-outline" size={30} coçor={'#fff'} />
+          <Icon 
+            style={styles.carouselIcon}
+            name="play-circle-outline" 
+            size={30} 
+            color='#fff' />
         </TouchableOpacity>
       </View>
     )
@@ -75,7 +79,7 @@ export default function App() {
           <ImageBackground
             source={{ uri: background}}
             style={styles.imgBg}
-            blurRadius={8}
+            blurRadius={4}
             >
 
             <View style={styles.viewSearch}>
@@ -102,6 +106,9 @@ export default function App() {
                 sliderWidth={screenWidth}
                 itemWidth={200}
                 inactiveSlideOpacity={0.5}
+                onSnapToItem={ (index) => {
+                  setBackground(lista[index].img)
+                }}
               />
             </View>
           
@@ -150,5 +157,29 @@ const styles = StyleSheet.create({
     height: 350,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  carousel:{
+    flex: 1,
+    overflow: 'visible'
+  },
+  carouselImg: {
+    alignSelf: 'center',
+    width: 200,
+    height: 300,
+    borderRadius: 12,
+    backgroundColor: 'rgba(0,0,0,0.5)'
+  },
+  carouselText: {
+    padding: 15,
+    color: '#fff',
+    position: 'absolute',
+    bottom: 10,
+    left: 2,
+    fontWeight: 'bold'
+  },
+  carouselIcon: {
+    position: 'absolute',
+    top: 15,
+    right: 15,
   }
 })
