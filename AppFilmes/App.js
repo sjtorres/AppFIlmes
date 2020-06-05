@@ -67,7 +67,7 @@ export default function App() {
                 />
 
                 <TouchableOpacity>
-                  <Icon name='search' color="#000" size={25} />
+                  <Icon style={styles.icon} name='search' color="#000" size={25} />
                 </TouchableOpacity>
 
             </View>
@@ -102,4 +102,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'center'
   },
+  input: {
+    width: '90%',
+    padding: 13,
+    paddingLeft:20,
+    fontSize: 17,
+  },
+  icon: {
+    position: "absolute",
+    top: 15,
+  }
 })
