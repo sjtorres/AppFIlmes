@@ -52,6 +52,7 @@ export default function App() {
   ])
 
   const [background, setBackground] = useState(lista[0].img)
+  const [activeIndex, setActiveIndex] = useState(0)
 
   const _renderItem = ({ item, index }) => {
     return (
@@ -88,8 +89,8 @@ export default function App() {
                 placeholder="Procurando algo?"
                 />
 
-                <TouchableOpacity>
-                  <Icon style={styles.icon} name='search' color="#000" size={25} />
+                <TouchableOpacity style={styles.icon}>
+                  <Icon  name='search' color="#000" size={25} />
                 </TouchableOpacity>
             </View>
 
@@ -108,8 +109,26 @@ export default function App() {
                 inactiveSlideOpacity={0.5}
                 onSnapToItem={ (index) => {
                   setBackground(lista[index].img)
+                  setActiveIndex(index)
                 }}
               />
+            </View>
+
+            <View style={styles.moreInfo}>
+              <View>
+                <Text style={styles.movieTitle}>{lista[activeIndex].title}</Text>
+                <Text style={styles.movieDesc}>{lista[activeIndex].text}</Text>
+              </View>
+              <TouchableOpacity 
+                style={{ marginTop:10, marginRight: 15 }}
+                onPress={() => alert('CLICOU')}
+              >
+                <Icon 
+                  name="queue" 
+                  color="#131313" 
+                  size={30}
+                />
+              </TouchableOpacity>
             </View>
           
           </ImageBackground>
@@ -181,5 +200,28 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 15,
     right: 15,
+  },
+  moreInfo: {
+    backgroundColor: '#fff',
+    width: screenWidth,
+    height: screenHeight,
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    flexDirection: 'row',
+    justifyContent: "space-around"
+  },
+  movieTitle: {
+    paddingLeft: 15,
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#131313',
+    marginBottom: 5,
+    marginTop: 5
+  },
+  movieDesc: {
+    paddingLeft: 15,
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#131313'
   }
 })
